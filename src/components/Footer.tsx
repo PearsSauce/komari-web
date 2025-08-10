@@ -1,5 +1,6 @@
 import { Flex, Text } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
+import { useSettings } from '@/lib/api';
 
 const Footer = () => {
   //const currentYear = new Date().getFullYear();
@@ -20,6 +21,7 @@ const Footer = () => {
 
   const buildTime = typeof __BUILD_TIME__ !== 'undefined' ? __BUILD_TIME__ : null;
   const [versionInfo, setVersionInfo] = useState<{ hash: string; version: string } | null>(null);
+  const { settings } = useSettings();
 
   useEffect(() => {
     const fetchVersionInfo = async () => {
@@ -55,6 +57,20 @@ const Footer = () => {
           <Text size="2" color="gray">
              Powered by Komari Monitor.
           </Text>
+          {settings.icp_number && (
+            <Text size="1" color="gray">
+              <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
+                ICP备案号: {settings.icp_number}
+              </a>
+            </Text>
+          )}
+          {settings.psb_number && (
+            <Text size="1" color="gray">
+              <a href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank" rel="noopener noreferrer">
+                公安备案号: {settings.psb_number}
+              </a>
+            </Text>
+          )}
           {buildTime && (
             <Text size="1" color="gray">
               Build Time: {formatBuildTime(buildTime)}
@@ -71,4 +87,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

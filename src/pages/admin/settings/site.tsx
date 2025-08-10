@@ -45,6 +45,22 @@ export default function SiteSettings() {
           await updateSettingsWithToast({ description: data }, t);
         }}
       />
+      <SettingCardShortTextInput
+        title={t("settings.site.icp_number")}
+        description={t("settings.site.icp_number_description")}
+        defaultValue={settings.icp_number || ""}
+        OnSave={async (data) => {
+          await updateSettingsWithToast({ icp_number: data }, t);
+        }}
+      />
+      <SettingCardShortTextInput
+        title={t("settings.site.psb_number")}
+        description={t("settings.site.psb_number_description")}
+        defaultValue={settings.psb_number || ""}
+        OnSave={async (data) => {
+          await updateSettingsWithToast({ psb_number: data }, t);
+        }}
+      />
       <SettingCardSwitch
         title={t("settings.site.cros")}
         description={t("settings.site.cros_description")}
